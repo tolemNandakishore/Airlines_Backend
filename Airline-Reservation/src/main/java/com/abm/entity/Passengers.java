@@ -14,24 +14,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_Passengers")
 public class Passengers {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Passenger_Id")
-    private Long passengerId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Passenger_Id")
+	private Long passengerId;
 
-    @Column(name = "First_Name")
-    private String firstName;
+	@Column(name = "First_Name")
+	private String firstName;
 
-    @Column(name = "Last_Name")
-    private String lastName;
+	@Column(name = "Last_Name")
+	private String lastName;
+	private Gender gender;
 
-   // @OneToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
-    @ManyToOne // Change from @OneToMany to @ManyToOne
-    @JoinColumn(name = "Reservation_Id") 
-    private Reservation reservation;
+	public static enum Gender{
+		MALE,FEMALE,OTHER;
+	}
+
+	// @OneToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
+	@ManyToOne // Change from @OneToMany to @ManyToOne
+	@JoinColumn(name = "Reservation_Id") 
+	private Reservation reservation;
 
 	public Long getPassengerId() {
 		return passengerId;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public void setPassengerId(Long passengerId) {
@@ -61,6 +74,6 @@ public class Passengers {
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
- 
-    
+
+
 }

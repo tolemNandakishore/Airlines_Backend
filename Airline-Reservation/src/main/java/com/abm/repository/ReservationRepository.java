@@ -1,5 +1,7 @@
 package com.abm.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,5 +13,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     
 	@Query("select count(c) from Reservation c where c.reservationId = ?1")
 	Long findIfReservationExists(Long reservationId);
+
+	Optional<Reservation> findById(Long reservationId);
+
+	String findByReservationId(Long reservationId);
 
 }

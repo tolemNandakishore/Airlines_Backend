@@ -22,7 +22,7 @@ public class Reservation {
 	@Column(name = "Reservation_Id")
 	private Long reservationId;
 
-	@ManyToOne
+	@ManyToOne//No need for reservation
 	@JoinColumn(name = "User_Id")
 	private Users user;
 
@@ -35,9 +35,12 @@ public class Reservation {
 
 	@Column(name = "Seat_Number")
 	private String seatNumber;
+	
+	private double amount;
 
-	@Column(name = "Status")
-	private String status;
+	/*
+	 * @Column(name = "Status") private String status;
+	 */
 
 	/*
 	 * @ManyToOne
@@ -61,14 +64,14 @@ public class Reservation {
 		this.reservationId = reservationId;
 	}
 
-	public Users getUser() {
-		return user;
-	}
+
+	public Users getUser() { return user; }
 
 
-	public void setUser(Users user) {
-		this.user = user;
-	}
+
+
+	public void setUser(Users user) { this.user = user; }
+
 
 	public Flights getFlight() {
 		return flight;
@@ -94,20 +97,28 @@ public class Reservation {
 		this.seatNumber = seatNumber;
 	}
 
-	public String getStatus() {
-		return status;
-	}
+	/*
+	 * public String getStatus() { return status; }
+	 */
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	/*
+	 * public void setStatus(String status) { this.status = status; }
+	 */
 
 	public List<Passengers> getPassengers() {
 		return passengers;
 	}
-	
 
-	
+
+
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 
 	public void setPassengers(List<Passengers> passengers) {
 		this.passengers = passengers;
