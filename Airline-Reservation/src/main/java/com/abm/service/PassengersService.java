@@ -1,8 +1,12 @@
 package com.abm.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.abm.dto.PassengerDTO;
 import com.abm.entity.Passengers;
 import com.abm.entity.Reservation;
 import com.abm.exception.PassengerServiceException;
@@ -29,5 +33,18 @@ public class PassengersService {
 		return "Passenger added successfully..!!";
 
 	}*/
+	
+	/*changes by john*/
+	public void addPassenger(List<PassengerDTO> passengerDTOlist) {
+		 List<Passengers> passengersList = new ArrayList<>();
+	for( PassengerDTO passengerDTO :passengerDTOlist) {	 
+		Passengers passenger = new Passengers();
+		passenger.setFirstName(passengerDTO.getFirstName());
+		passenger.setLastName(passengerDTO.getLastName());
+		
+		passengersList.add(passenger);
+	 }
+	  passengersRepository.saveAll(passengersList);
+	}
 
 }
