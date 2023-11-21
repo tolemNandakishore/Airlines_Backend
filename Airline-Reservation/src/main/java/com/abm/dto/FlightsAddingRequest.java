@@ -14,6 +14,13 @@ public class FlightsAddingRequest {
 	private LocalDateTime arrivalTime;
 	private String from;
 	private String to;
+	private String flightName;
+	public String getFlightName() {
+		return flightName;
+	}
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
+	}
 	public Long getFlightId() {
 		return flightId;
 	}

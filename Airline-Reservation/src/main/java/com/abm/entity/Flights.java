@@ -39,12 +39,14 @@ public class Flights {
 
 	@Column(name = "to_location")
 	private String to;
-	@OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "flight")
 	private List<Reservation> reservations;
 	
 	private String status;
 	
-
+	@Column(name="flight_name")
+	private String flightName;
+    
 	public String getStatus() {
 		return status;
 	}
