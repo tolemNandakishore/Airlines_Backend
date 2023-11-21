@@ -1,5 +1,7 @@
 package com.abm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,9 @@ public class AirlineService {
 		
 	}
 	
-	
+//	public List<Airline> getAllAirline() {
+//		List<Airline>responseairline=airlineRepository.findAll();
+//		return responseairline;
+//	}
 
 }

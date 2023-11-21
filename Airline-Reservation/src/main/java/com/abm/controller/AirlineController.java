@@ -1,9 +1,12 @@
 package com.abm.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.abm.dto.RegistrationStatus;
 import com.abm.entity.Airline;
+import com.abm.entity.Flights;
 import com.abm.exception.AirlineServiceException;
 import com.abm.service.AirlineService;
 
@@ -49,5 +53,11 @@ public class AirlineController {
 			
 		}
 		//http://localhost:7777/airline-controller/add-airline
+	
 	}
+//	 @GetMapping("/fetchairline")
+//	    public List<Airline> getAllAirline() {
+//	        return airlineService.getAllAirline();
+//	    }
+//	 //http://localhost:7777/airline-controller/fetchairline
 }

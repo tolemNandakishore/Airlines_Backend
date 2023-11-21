@@ -20,6 +20,8 @@ public interface FlightsRepository extends JpaRepository<Flights, Long>{
 	@Query("select count(c) from Flights c where c.flightId = ?1")
 	Long findIfFlightExists(Long flightId);
 
-
+	
+	
+	
 
 }
