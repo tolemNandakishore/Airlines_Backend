@@ -41,7 +41,7 @@ public class ReservationService {
 
 	}
 
-	public Long bookTicket(ReservationDetails reservationDetails) {
+	/*public Long bookTicket(ReservationDetails reservationDetails) {
 		Flights  flights=	flightsRepository.findById(reservationDetails.getFlightId()).get();
 		Reservation reservation=new  Reservation();
 		reservation.setFlight(flights);
@@ -49,17 +49,37 @@ public class ReservationService {
 		/*reservation.setSeatNumber(null);//ask to sir...!!		
 		 * reservation.setFlightClass(null); reservation.setAmount(5000);
 		 */
-		for(Passengers passengers:reservationDetails.getPassengers())
+		
+	/*	for(Passengers passengers:reservationDetails.getPassengers())
 			passengers.setReservation(reservation);
 		reservation.setPassengers(reservationDetails.getPassengers());
 		Reservation r= reservationRepository.save(reservation);
 		return r.getReservationId();
-	}
+	}*/
 
-	
+	public Reservation bookTicket(ReservationDetails reservationDetails) {
+        Long flightId = reservationDetails.getFlightId();
+        Flights flight = flightsRepository.findById(flightId)
+                .orElseThrow(() -> new ReservationServiceException("Flight not found"));
+
+        Reservation reservation = new Reservation();
+        reservation.setFlight(flight);
+        reservation.setReservationDate(LocalDate.now());
+
+        List<Passengers> passengers = reservationDetails.getPassengers();
+        for (Passengers passenger : passengers) {
+            passenger.setReservation(reservation);
+        }
+
+        reservation.setPassengers(passengers);
+        reservation.setAmount(5000); // Set the amount as needed
+
+        return reservationRepository.save(reservation);
+    }
+
 	public String cancleReservation(Long reservationId) {
 		return reservationRepository.findByReservationId(reservationId);
-				
+
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.abm.dto.BookingStatus;
 import com.abm.dto.ReservationDetails;
+import com.abm.entity.Reservation;
 import com.abm.exception.ReservationServiceException;
 import com.abm.service.ReservationService;
 
@@ -52,7 +53,7 @@ public class ReservationController {
 	@PostMapping("/flight/reservation")
 	public BookingStatus booking(@RequestBody ReservationDetails reservationDetails ) {
 		try {
-		Long id=reservationService.bookTicket(reservationDetails);
+		Reservation id=reservationService.bookTicket(reservationDetails);
 		BookingStatus status=new BookingStatus();
 		status.setStatus(true);
 		status.setMessageIfAny("Booking Successfully..!");

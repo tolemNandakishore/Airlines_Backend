@@ -2,12 +2,23 @@ package com.abm.dto;
 
 import java.util.List;
 
+import com.abm.entity.Flights;
 import com.abm.entity.Passengers;
 
 public class ReservationDetails {
 	
 	private Long flightId;
+	private Flights flights;
+
 	
+	public Flights getFlights() {
+		return flights;
+	}
+
+	public void setFlights(Flights flights) {
+		this.flights = flights;
+	}
+
 	private List<Passengers>passengers;
 
 	public Long getFlightId() {
