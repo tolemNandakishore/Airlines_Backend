@@ -66,7 +66,7 @@ public class ReservationController {
 			status.setMessageIfAny("reservation not completed.");
 			return status;			
 		}
-		//http://localhost:7777/reservation_controller/reservation
+		//http://localhost:7777/reservation_controller/flight/reservation
 		
 	}
 	
