@@ -24,11 +24,11 @@ public class Passengers {
 
 	@Column(name = "Last_Name")
 	private String lastName;
-	private Gender gender;
+	//private Gender gender;
 
-	public static enum Gender{
-		MALE,FEMALE,OTHER;
-	}
+	/*
+	 * public static enum Gender{ MALE,FEMALE,OTHER; }
+	 */
 
 	// @OneToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
 	@ManyToOne // Change from @OneToMany to @ManyToOne
@@ -39,13 +39,13 @@ public class Passengers {
 		return passengerId;
 	}
 
-	public Gender getGender() {
+	/*public Gender getGender() {
 		return gender;
 	}
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
-	}
+	}*/
 
 	public void setPassengerId(Long passengerId) {
 		this.passengerId = passengerId;

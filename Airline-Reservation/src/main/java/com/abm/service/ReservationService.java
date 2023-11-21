@@ -47,9 +47,9 @@ public class ReservationService {
 		reservation.setFlight(flights);
 		reservation.setReservationDate(LocalDate.now());
 		/*reservation.setSeatNumber(null);//ask to sir...!!		
-		 * reservation.setFlightClass(null); reservation.setAmount(5000);
-		 */
-		
+	 * reservation.setFlightClass(null); reservation.setAmount(5000);
+	 */
+
 	/*	for(Passengers passengers:reservationDetails.getPassengers())
 			passengers.setReservation(reservation);
 		reservation.setPassengers(reservationDetails.getPassengers());
@@ -58,24 +58,25 @@ public class ReservationService {
 	}*/
 
 	public Reservation bookTicket(ReservationDetails reservationDetails) {
-        Long flightId = reservationDetails.getFlightId();
-        Flights flight = flightsRepository.findById(flightId)
-                .orElseThrow(() -> new ReservationServiceException("Flight not found"));
 
-        Reservation reservation = new Reservation();
-        reservation.setFlight(flight);
-        reservation.setReservationDate(LocalDate.now());
 
-        List<Passengers> passengers = reservationDetails.getPassengers();
-        for (Passengers passenger : passengers) {
-            passenger.setReservation(reservation);
-        }
+		Reservation reservation = new Reservation();
+		reservation.setFlightClass(reservationDetails.getClassFlight());//work on  this
+		reservation.setReservationDate(reservationDetails.getReservationDate());
+		reservation.setReservationDate(LocalDate.now());
+		reservation.setSeatNumber(reservationDetails.getSeatNumber());
+		reservation.setFlight(flightsRepository.findByFlightId(reservationDetails.getFlightId()));
 
-        reservation.setPassengers(passengers);
-        reservation.setAmount(5000); // Set the amount as needed
+		List<Passengers> passengers = reservationDetails.getPassengers();
+		for (Passengers passenger : passengers) {
+			passenger.setReservation(reservation);
+		}
 
-        return reservationRepository.save(reservation);
-    }
+		reservation.setPassengers(passengers);
+		reservation.setAmount(reservationDetails.getAmount());
+
+		return reservationRepository.save(reservation);
+	}
 
 	public String cancleReservation(Long reservationId) {
 		return reservationRepository.findByReservationId(reservationId);

@@ -5,6 +5,7 @@ import com.abm.entity.Reservation;
 public class BookingStatus extends Status {
 
 	private Reservation ReservationId;
+	
 
 	public Reservation getReservationId() {
 		return ReservationId;
