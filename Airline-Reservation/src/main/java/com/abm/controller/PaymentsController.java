@@ -14,10 +14,11 @@ import com.abm.repository.PaymentsRepository;
 @CrossOrigin
 @RequestMapping("/payments_controller")
 public class PaymentsController {
-	
+
 	@Autowired
 	private PaymentsRepository paymentsRepository;
 	//start writing the method regarding to the payments
 	private static final Logger log = LoggerFactory.getLogger(PaymentsController.class);
+	
 
 }
