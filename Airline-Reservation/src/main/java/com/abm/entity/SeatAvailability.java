@@ -66,5 +66,6 @@ public class SeatAvailability {
 		this.date = date;
 	}
 
+
     
 }

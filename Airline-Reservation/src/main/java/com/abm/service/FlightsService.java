@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 
 import com.abm.entity.Flights;
 import com.abm.entity.Reservation;
+import com.abm.entity.SeatAvailability;
 import com.abm.exception.FlightServiceException;
 import com.abm.repository.FlightsRepository;
+import com.abm.repository.SeatAvailabilityRepository;
 
 @Service
 public class FlightsService {  
 
 	@Autowired
 	private FlightsRepository  flightsRepository;
+	
+	@Autowired
+	private SeatAvailabilityRepository seatAvailabilityRepository;
 	/*
 	 * @Autowired private AirlineRepository airlineRepository;
 	 */
@@ -59,6 +64,15 @@ public class FlightsService {
 //				reservation.setFlight(flights);
 //			}
 			Flights savedFlights=flightsRepository.save(flights);
+			for(int i=1;i<=100;i++)
+			{
+				SeatAvailability seatAvailability=new SeatAvailability();
+				seatAvailability.setSeatNumber(Integer.toString(i));
+				seatAvailability.setAvailable(true);
+				seatAvailability.setFlight(savedFlights);
+				seatAvailabilityRepository.save(seatAvailability);
+			}
+			
 			return  savedFlights.getFlightId();
 		}
 		else {
