@@ -41,7 +41,7 @@ public class PassengersService {
 		Passengers passenger = new Passengers();
 		passenger.setFirstName(passengerDTO.getFirstName());
 		passenger.setLastName(passengerDTO.getLastName());
-		
+		System.out.println(passengerDTO.getFirstName());
 		passengersList.add(passenger);
 	 }
 	  passengersRepository.saveAll(passengersList);

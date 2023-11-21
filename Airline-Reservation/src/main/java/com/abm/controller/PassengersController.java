@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abm.dto.PassengerDTO;
+import com.abm.dto.ReservationDetailsDTO;
 import com.abm.dto.addPassengersStatus;
 import com.abm.entity.Passengers;
 import com.abm.exception.PassengerServiceException;
@@ -53,9 +54,9 @@ public class PassengersController {
 	
 	/*changes done by john*/ 
 	 @PostMapping("/add-passenger")
-	 public addPassengersStatus ProcessPassenger(@RequestBody List<PassengerDTO> passengerDTOs) {
+	 public addPassengersStatus ProcessPassenger(@RequestBody ReservationDetailsDTO passengerDetailsDTO) {
 		 addPassengersStatus status=new addPassengersStatus();
-		 passengersService.addPassenger(passengerDTOs);
+		 passengersService.addPassenger(passengerDetailsDTO.getPassengers());
 		 status.setStatus(true);
 			status.setMessageIfAny("Passengers added Successfully..!");	
 			return status;
