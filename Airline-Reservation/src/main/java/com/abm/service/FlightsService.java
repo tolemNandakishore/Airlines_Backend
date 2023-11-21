@@ -55,9 +55,9 @@ public class FlightsService {
 		Long count=flightsRepository.findIfFlightExists(flights.getFlightId());
 		
 		if(count==0) {
-			for(Reservation reservation:flights.getReservations()) {
-				reservation.setFlight(flights);
-			}
+//			for(Reservation reservation:flights.getReservations()) {
+//				reservation.setFlight(flights);
+//			}
 			Flights savedFlights=flightsRepository.save(flights);
 			return  savedFlights.getFlightId();
 		}
