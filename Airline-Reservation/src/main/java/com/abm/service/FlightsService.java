@@ -33,24 +33,21 @@ public class FlightsService {
 	}*/
 
 	public List<Flights> flightSearching(String from, String to) {
-
 		return flightsRepository. findByFromAndTo(from,to);
 	}
 
 
 	public String flightUpdate(Flights request) {
-
 		flightsRepository.save(request);
 		return "Flight updated successfully...!!";
 	}
 
 	public String deleteByFlightId(Long flightId) {
 		flightsRepository.deleteById(flightId);
-		return "Flight delect successfully...!!";
+		return "Flight delete successfully...!!";
 	}
 
 	public Flights fetchDetailsByFlightId(Long flightId) {
-		
 		return flightsRepository.findByFlightId(flightId);
 	}
 
@@ -69,6 +66,19 @@ public class FlightsService {
 		}
 				
 	}
+
+	public long flightcancel(long flightId) {
+		Flights flight=flightsRepository.findById(flightId).get();
+		flight.setStatus("cancel");
+		flightsRepository.save(flight);
+		return flightId;
+		
+	}
+
+
+	
+
+
 
 
 

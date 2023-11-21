@@ -2,6 +2,7 @@ package com.abm.controller;
 
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abm.dto.DeleteFlight;
 import com.abm.dto.FlightAddingStatus;
 import com.abm.dto.FlightUpdateRequest;
 import com.abm.dto.FlightsAddingRequest;
@@ -105,6 +107,16 @@ public class FlightsController {
 		
 	}
 	// http://localhost:7777/flights-controller/fetch-details/1001
+	@PostMapping("/flightstatus")
+	public DeleteFlight stauts(@RequestParam long flightId) {
+		flightsService.flightcancel(flightId);
+		 DeleteFlight delete=new DeleteFlight();
+		delete.setFlightId(flightId);
+		delete.setStatus(true);
+		delete.setMessageIfAny("cancel flight sucessfully");
+		return delete;
+	}
+	// http://localhost:7777/flights-controller/flightstatus?flightId=2
 	
 
 }

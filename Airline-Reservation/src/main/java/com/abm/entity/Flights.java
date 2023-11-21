@@ -41,6 +41,17 @@ public class Flights {
 	private String to;
 	@OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
+	
+	private String status;
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Long getFlightId() {
 		return flightId;
@@ -112,6 +123,12 @@ public class Flights {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
+	public void setCancelled(boolean b) {
+		return;
+		
+	}
+
+
 
 }
