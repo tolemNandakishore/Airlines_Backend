@@ -90,10 +90,10 @@ public class FlightsService {
 	}
 
 
-//	public List<Flights> getAllFlights() {
-//		List<Flights>responseflights=flightsRepository.findAll();
-//		return responseflights;
-//	}
+	public List<Flights> getAll() {
+		List<Flights>flightList=flightsRepository.findAll();
+		return flightList;
+	}
 
 	
 	

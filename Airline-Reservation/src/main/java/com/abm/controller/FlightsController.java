@@ -117,9 +117,11 @@ public class FlightsController {
 		return delete;
 	}
 	// http://localhost:7777/flights-controller/flightstatus?flightId=2
-//	 @GetMapping("/fetchflight")
-//	    public List<Flights> getAllFlights() {
-//	        return flightsService.getAllFlights();
-//	    }
-	 // http://localhost:7777/flights-controller/fetchflight
+	
+	
+	 @GetMapping("/getAllFlights")
+	 public List<Flights>getAll() {
+        return flightsService.getAll();
+	    }
+	 // http://localhost:7777/flights-controller/getAllFlights
 }
