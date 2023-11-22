@@ -1,5 +1,6 @@
 package com.abm.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -124,4 +125,19 @@ public class FlightsController {
         return flightsService.getAll();
 	    }
 	 // http://localhost:7777/flights-controller/getAllFlights
+	 
+	 
+	 @PutMapping("/update-flights")
+		public Flights editFlights(@RequestBody Flights flights) {
+		flightsService.editFlights(flights);
+		Flights f=new Flights();
+		f.setDepartureTime(LocalDateTime.now());
+		f.setArrivalTime(LocalDateTime.now());
+		f.setFrom("from");
+		f.setTo("to");
+		f.setPrice(111);
+		f.setStatus("true");
+		return f;
+		}
+	 // http://localhost:7777/flights-controller/update-flights
 }
