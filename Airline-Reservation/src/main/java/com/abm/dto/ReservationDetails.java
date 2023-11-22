@@ -9,12 +9,11 @@ import com.abm.entity.Passengers;
 public class ReservationDetails {
 
 	private Long flightId;
-
-	private Flights flights;
 	private String classFlight;
 	private LocalDate reservationDate;	
 	private String seatNumber;
-    private Double amount;
+	private Double amount;
+	private List<Passengers>passengers;
 
 
 	public Double getAmount() {
@@ -48,17 +47,6 @@ public class ReservationDetails {
 	public void setClassFlight(String classFlight) {
 		this.classFlight = classFlight;
 	}
-
-	public Flights getFlights() {
-		return flights;
-	}
-
-	public void setFlights(Flights flights) {
-		this.flights = flights;
-	}
-
-	private List<Passengers>passengers;
-
 	public Long getFlightId() {
 		return flightId;
 	}

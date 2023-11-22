@@ -30,10 +30,41 @@ public class Payments {
   
 
     @Column(name = "Amount")
-    private BigDecimal amount;
+    private Long amount;
 
     @Column(name = "Payment_Method")
     private String paymentMethod;
+    
+    private Long cardNumber;
+    private String cvv;
+    private String cardName;
+    
+    
+    
+
+	public Long getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(Long cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public String getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
 
 	public Long getPaymentId() {
 		return paymentId;
@@ -59,11 +90,11 @@ public class Payments {
 		this.paymentDate = paymentDate;
 	}
 
-	public BigDecimal getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
