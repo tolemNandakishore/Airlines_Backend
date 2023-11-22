@@ -1,14 +1,17 @@
 package com.abm.dto;
 
+import com.abm.entity.Reservation;
+
 public class BookingStatus extends Status {
 
-	private Long ReservationId;
+	private Reservation ReservationId;
+	
 
-	public Long getReservationId() {
+	public Reservation getReservationId() {
 		return ReservationId;
 	}
 
-	public void setReservationId(Long id) {
+	public void setReservationId(Reservation id) {
 		ReservationId = id;
 	}
 	

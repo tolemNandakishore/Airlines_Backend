@@ -41,25 +41,46 @@ public class ReservationService {
 
 	}
 
-	public Long bookTicket(ReservationDetails reservationDetails) {
+	/*public Long bookTicket(ReservationDetails reservationDetails) {
 		Flights  flights=	flightsRepository.findById(reservationDetails.getFlightId()).get();
 		Reservation reservation=new  Reservation();
 		reservation.setFlight(flights);
 		reservation.setReservationDate(LocalDate.now());
 		/*reservation.setSeatNumber(null);//ask to sir...!!		
-		 * reservation.setFlightClass(null); reservation.setAmount(5000);
-		 */
-		for(Passengers passengers:reservationDetails.getPassengers())
+	 * reservation.setFlightClass(null); reservation.setAmount(5000);
+	 */
+
+	/*	for(Passengers passengers:reservationDetails.getPassengers())
 			passengers.setReservation(reservation);
 		reservation.setPassengers(reservationDetails.getPassengers());
 		Reservation r= reservationRepository.save(reservation);
 		return r.getReservationId();
+	}*/
+
+	public Reservation bookTicket(ReservationDetails reservationDetails) {
+
+
+		Reservation reservation = new Reservation();
+		reservation.setFlightClass(reservationDetails.getClassFlight());//work on  this
+		reservation.setReservationDate(reservationDetails.getReservationDate());
+		reservation.setReservationDate(LocalDate.now());
+		reservation.setSeatNumber(reservationDetails.getSeatNumber());
+		reservation.setFlight(flightsRepository.findByFlightId(reservationDetails.getFlightId()));
+
+		List<Passengers> passengers = reservationDetails.getPassengers();
+		for (Passengers passenger : passengers) {
+			passenger.setReservation(reservation);
+		}
+
+		reservation.setPassengers(passengers);
+		reservation.setAmount(reservationDetails.getAmount());
+
+		return reservationRepository.save(reservation);
 	}
 
-	
 	public String cancleReservation(Long reservationId) {
 		return reservationRepository.findByReservationId(reservationId);
-				
+
 	}
 
 }

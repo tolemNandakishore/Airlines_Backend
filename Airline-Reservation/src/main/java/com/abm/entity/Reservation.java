@@ -77,8 +77,8 @@ public class Reservation {
 		return flight;
 	}
 
-	public void setFlight(Flights flight) {
-		this.flight = flight;
+	public void setFlight(Flights long1) {
+		this.flight = long1;
 	}
 
 	public LocalDate getReservationDate() {

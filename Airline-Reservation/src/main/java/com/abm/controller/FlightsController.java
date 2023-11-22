@@ -118,5 +118,10 @@ public class FlightsController {
 	}
 	// http://localhost:7777/flights-controller/flightstatus?flightId=2
 	
-
+	
+	 @GetMapping("/getAllFlights")
+	 public List<Flights>getAll() {
+        return flightsService.getAll();
+	    }
+	 // http://localhost:7777/flights-controller/getAllFlights
 }
