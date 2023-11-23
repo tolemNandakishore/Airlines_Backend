@@ -1,5 +1,6 @@
 package com.abm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +24,7 @@ import com.abm.dto.FlightUpdateRequest;
 import com.abm.dto.FlightsAddingRequest;
 import com.abm.entity.Flights;
 import com.abm.exception.FlightServiceException;
+import com.abm.repository.FlightsRepository;
 import com.abm.service.FlightsService;
 
 @RestController
@@ -32,6 +34,8 @@ public class FlightsController {
 
 	@Autowired
 	private FlightsService flightsService;
+	@Autowired
+	private FlightsRepository flightsRepository;
 	// Start writing the Methods regarding to flights
 	private static final Logger log = LoggerFactory.getLogger(FlightsController.class);
 
@@ -46,17 +50,17 @@ public class FlightsController {
 
 		return response;
 	}*/
-	
+
 	@PostMapping("/adding-flights")
 	public FlightAddingStatus addFlights(@RequestBody Flights flights) {
 		try {
 			Long id=flightsService.addFlights(flights);
-			
+
 			FlightAddingStatus status=new FlightAddingStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("Flight added successfully");
 			status.setFlightId(id);
-			
+
 			return status;
 		}
 		catch (FlightServiceException e) {
@@ -72,25 +76,44 @@ public class FlightsController {
 
 	@GetMapping("/flight-search")
 	public List<Flights> flightSearching(@RequestParam String from, @RequestParam String to) {
-		List<Flights> list = flightsService.flightSearching(from, to);
+		List<Flights> allFlights= flightsService.flightSearching(from, to);
+		//write the code to return only those flights which are operated by Air India
 
-		return list;
+		/*List<Flights> airIndiaFlights= new ArrayList<>();
 
+		for(Flights flight:allFlights) {
+			if(flight.getFlightName().equals("Air India"))
+				airIndiaFlights.add(flight);
+		}*/
+		
+		/*for(Flights flight:allFlights) {
+			if(isOperatedByAirIndia(flight)) {
+				airIndiaFlights.add(flight);
+
+			}
+			
+		}*/
+		
+		
+
+		return allFlights;
 	}
-
 	
-	 //now i am working on admin login so, flows are in comment i.e updates
-	 
-	 @PutMapping("/update-flight/{flightId}")
-	 public String  flightUpdate( @RequestBody Flights	request, @PathVariable Long  flightId) {
-	 
-	 String result=flightsService.flightUpdate(request);
-	 
-	 return result; 
-	 }
-//	http://localhost:7777/flights-controller/update-flight/{flightId}1001
+	/*private boolean  isOperatedByAirIndia(Flights flight) {
+		String flightname=flight.getFlightName();
+		return "Air India".equals(flightname);
+	}*/
 
-	
+	@PutMapping("/update-flight/{flightId}")
+	public String  flightUpdate( @RequestBody Flights	request, @PathVariable Long  flightId) {
+
+		String result=flightsService.flightUpdate(request);
+
+		return result; 
+	}
+	//	http://localhost:7777/flights-controller/update-flight/{flightId}1001
+
+
 
 	@DeleteMapping("/delete-flight/{flightId}")
 	public String deleteByFlightId(@PathVariable Long flightId) {
@@ -98,25 +121,24 @@ public class FlightsController {
 		String response = flightsService.deleteByFlightId(flightId);
 		return response;
 	}
-	// http://localhost:7777/flights-controller/delete-flight/{orderId}
-	
+	// http://localhost:7777/flights-controller/delete-flight/{flightId}
+
 	@GetMapping("/fetch-details/{flightId}")
 	public Flights fetchDetailsByFlightId(@PathVariable Long flightId) {
 		Flights flights= flightsService.fetchDetailsByFlightId(flightId);
 		return flights;
-		
+
 	}
 	// http://localhost:7777/flights-controller/fetch-details/1001
 	@PostMapping("/flightstatus")
 	public DeleteFlight stauts(@RequestParam long flightId) {
 		flightsService.flightcancel(flightId);
-		 DeleteFlight delete=new DeleteFlight();
+		DeleteFlight delete=new DeleteFlight();
 		delete.setFlightId(flightId);
 		delete.setStatus(true);
 		delete.setMessageIfAny("cancel flight sucessfully");
 		return delete;
 	}
 	// http://localhost:7777/flights-controller/flightstatus?flightId=2
-	
-
+		
 }

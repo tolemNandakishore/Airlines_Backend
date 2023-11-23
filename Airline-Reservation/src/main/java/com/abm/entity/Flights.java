@@ -24,7 +24,7 @@ public class Flights {
 	private Long flightId;
 	private double price;  //added newly
 
-	@ManyToOne(cascade = CascadeType.PERSIST)//important
+	@ManyToOne(cascade = CascadeType.ALL)//important
 	@JoinColumn(name = "Airline_Id")
 	private Airline airline;
 
@@ -47,6 +47,14 @@ public class Flights {
 	@Column(name="flight_name")
 	private String flightName;
     
+	public String getFlightName() {
+		return flightName;
+	}
+
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
+	}
+
 	public String getStatus() {
 		return status;
 	}
