@@ -41,22 +41,7 @@ public class ReservationService {
 
 	}
 
-	/*public Long bookTicket(ReservationDetails reservationDetails) {
-		Flights  flights=	flightsRepository.findById(reservationDetails.getFlightId()).get();
-		Reservation reservation=new  Reservation();
-		reservation.setFlight(flights);
-		reservation.setReservationDate(LocalDate.now());
-		/*reservation.setSeatNumber(null);//ask to sir...!!		
-	 * reservation.setFlightClass(null); reservation.setAmount(5000);
-	 */
-
-	/*	for(Passengers passengers:reservationDetails.getPassengers())
-			passengers.setReservation(reservation);
-		reservation.setPassengers(reservationDetails.getPassengers());
-		Reservation r= reservationRepository.save(reservation);
-		return r.getReservationId();
-	}*/
-
+	
 	public Reservation bookTicket(ReservationDetails reservationDetails) {
 
 
@@ -64,7 +49,6 @@ public class ReservationService {
 		reservation.setFlightClass(reservationDetails.getClassFlight());//work on  this
 		reservation.setReservationDate(reservationDetails.getReservationDate());
 		reservation.setReservationDate(LocalDate.now());
-		reservation.setSeatNumber(reservationDetails.getSeatNumber());
 		reservation.setFlight(flightsRepository.findByFlightId(reservationDetails.getFlightId()));
 
 		List<Passengers> passengers = reservationDetails.getPassengers();
@@ -73,7 +57,13 @@ public class ReservationService {
 		}
 
 		reservation.setPassengers(passengers);
-		reservation.setAmount(reservationDetails.getAmount());
+		Double amount = reservationDetails.getAmount();
+	    if (amount != null) {
+	        reservation.setAmount(amount);
+	    } else {
+	    	reservation.setAmount(1000);
+	        // Handle the case where amount is null, set a default value, log a message, etc.
+	    }
 
 		return reservationRepository.save(reservation);
 	}
