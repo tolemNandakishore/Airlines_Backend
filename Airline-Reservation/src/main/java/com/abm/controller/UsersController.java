@@ -33,7 +33,7 @@ public class UsersController {
 	@PostMapping("/registration") 
 	public UserRegistrationStatus register(@RequestBody Users users) {
 		try {
-			int id=usersService.register(users);
+			Long id=usersService.register(users);
 			UserRegistrationStatus status=new UserRegistrationStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("User registered Successfully!");

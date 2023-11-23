@@ -4,7 +4,7 @@ public class UserRegistrationStatus {
 	
 	private boolean status;
 	private String messageIfAny;
-	private int userId;
+	private Long userId;
 	public boolean isStatus() {
 		return status;
 	}
@@ -17,10 +17,10 @@ public class UserRegistrationStatus {
 	public void setMessageIfAny(String messageIfAny) {
 		this.messageIfAny = messageIfAny;
 	}
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_Flights")
 public class Flights {
@@ -39,6 +41,8 @@ public class Flights {
 
 	@Column(name = "to_location")
 	private String to;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "flight")
 	private List<Reservation> reservations;
 	

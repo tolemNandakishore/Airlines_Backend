@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 import com.abm.entity.Users;
 
 @Repository
-public interface UsersRepository  extends JpaRepository<Users, Integer>{
+public interface UsersRepository  extends JpaRepository<Users, Long>{
 
 	Users findByUserNameAndPassword(String userName, String password);
       
 	@Query("select count(c) from Users c where c.userName = ?1")
 	Long findIfUserExists(String userName);
-
+    
+	Users findByuserId(Long UserId);
 }
