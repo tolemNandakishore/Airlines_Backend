@@ -33,8 +33,8 @@ public class Reservation {
 	@Column(name = "Reservation_Date")
 	private LocalDate reservationDate;
 
-	@Column(name = "Seat_Number")
-	private String seatNumber;
+//	@Column(name = "Seat_Number")
+//	private String seatNumber;
 	
 	private double amount;
 
@@ -89,13 +89,13 @@ public class Reservation {
 		this.reservationDate = reservationDate;
 	}
 
-	public String getSeatNumber() {
-		return seatNumber;
-	}
-
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
-	}
+//	public String getSeatNumber() {
+//		return seatNumber;
+//	}
+//
+//	public void setSeatNumber(String seatNumber) {
+//		this.seatNumber = seatNumber;
+//	}
 
 	/*
 	 * public String getStatus() { return status; }

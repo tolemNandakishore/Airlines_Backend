@@ -1,36 +1,30 @@
 package com.abm.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.abm.entity.Flights;
-import com.abm.entity.Reservation;
+import com.abm.entity.SeatAvailability;
 import com.abm.exception.FlightServiceException;
 import com.abm.repository.FlightsRepository;
+import com.abm.repository.SeatAvailabilityRepository;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.databind.util.Converter;
 
 @Service
 public class FlightsService {  
 
 	@Autowired
 	private FlightsRepository  flightsRepository;
-	/*
-	 * @Autowired private AirlineRepository airlineRepository;
-	 */
-
-	/*public String addFlights(FlightsAddingRequest request) {
-		Flights flights=new Flights();
-		flights.setFrom(request.getFrom());
-		flights.setTo(request.getTo());
-		flights.setArrivalTime(request.getArrivalTime());
-		flights.setDepartureTime(request.getDepartureTime());
-		//flights.setAirline(airlineRepository.getAirLineById(request.getAirlineId()));
-		//flights.setAirline(request.getAirline());
-		flightsRepository.save(flights);
-		return "Flight added successfully...!!";
-
-	}*/
+	
+	@Autowired
+	private SeatAvailabilityRepository seatAvailabilityRepository;
+	
 
 	public List<Flights> flightSearching(String from, String to) {
 		return flightsRepository. findByFromAndTo(from,to);
@@ -55,10 +49,16 @@ public class FlightsService {
 		Long count=flightsRepository.findIfFlightExists(flights.getFlightId());
 		
 		if(count==0) {
-//			for(Reservation reservation:flights.getReservations()) {
-//				reservation.setFlight(flights);
-//			}
 			Flights savedFlights=flightsRepository.save(flights);
+			for(int i=1;i<=100;i++)
+			{
+				SeatAvailability seatAvailability=new SeatAvailability();
+				seatAvailability.setSeatNumber(Integer.toString(i));
+				seatAvailability.setAvailable(true);
+				seatAvailability.setFlight(savedFlights);
+				seatAvailabilityRepository.save(seatAvailability);
+			}
+			
 			return  savedFlights.getFlightId();
 		}
 		else {
@@ -71,15 +71,28 @@ public class FlightsService {
 		Flights flight=flightsRepository.findById(flightId).get();
 		flight.setStatus("cancel");
 		flightsRepository.save(flight);
-		return flightId;
-		
+		return flightId;	
 	}
 
 
-	
+	public List<Flights> getAll() {
+		List<Flights>flightList=flightsRepository.findAll();
+		return flightList;
+	}
 
 
+	public Flights editFlights(Flights flights) {
+		Flights flight=flightsRepository.save(flights);
+		return flight;
+	}
 
-
-
+    
+	public List<String> getAllFlightNames() {
+		List<String> flights=flightsRepository.findByFlightNameIsNotNull();
+		return  flights.stream().collect(Collectors.toList());
+		
+	}
+		
 }
+
+

@@ -1,12 +1,17 @@
 package com.abm.controller;
 
+
 import java.util.ArrayList;
+
+import java.time.LocalDateTime;
+//>>>>>>> branch 'master' of https://github.com/tolemNandakishore/Airlines_Backend
 import java.util.List;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -140,5 +145,34 @@ public class FlightsController {
 		return delete;
 	}
 	// http://localhost:7777/flights-controller/flightstatus?flightId=2
-		
+	
+	
+	 @GetMapping("/getAllFlights")
+	 public List<Flights>getAll() {
+        return flightsService.getAll();
+	    }
+	 // http://localhost:7777/flights-controller/getAllFlights
+	 
+	 
+	 @PutMapping("/update-flights")
+		public Flights editFlights(@RequestBody Flights flights) {
+		flightsService.editFlights(flights);
+		Flights f=new Flights();
+		f.setDepartureTime(LocalDateTime.now());
+		f.setArrivalTime(LocalDateTime.now());
+		f.setFrom("from");
+		f.setTo("to");
+		f.setPrice(111);
+		f.setStatus("true");
+		return f;
+		}
+	 // http://localhost:7777/flights-controller/update-flights
+//>>>>>>> branch 'master' of https://github.com/tolemNandakishore/Airlines_Backend
+	 @GetMapping("/all-flights")
+	 public List<String> getAllFlightNames() {
+		List<String>flightNames= flightsService.getAllFlightNames();
+		 return flightNames;
+		 
+	 }
+	 // http://localhost:7777/flights-controller/all-flights
 }

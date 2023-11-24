@@ -11,10 +11,8 @@ public class ReservationDetails {
 	private Long flightId;
 	private String classFlight;
 	private LocalDate reservationDate;	
-	private String seatNumber;
-	private Double amount;
 	private List<Passengers>passengers;
-
+	private Double amount;
 
 	public Double getAmount() {
 		return amount;
@@ -22,14 +20,6 @@ public class ReservationDetails {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public String getSeatNumber() {
-		return seatNumber;
-	}
-
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
 	}
 
 	public LocalDate getReservationDate() {

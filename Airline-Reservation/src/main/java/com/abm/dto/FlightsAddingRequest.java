@@ -15,6 +15,7 @@ public class FlightsAddingRequest {
 	private String from;
 	private String to;
 	private String flightName;
+	
 	public String getFlightName() {
 		return flightName;
 	}
