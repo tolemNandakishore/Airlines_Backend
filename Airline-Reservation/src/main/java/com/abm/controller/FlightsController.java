@@ -1,6 +1,10 @@
 package com.abm.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 
 
@@ -23,6 +27,7 @@ import com.abm.dto.FlightAddingStatus;
 import com.abm.dto.FlightUpdateRequest;
 import com.abm.dto.FlightsAddingRequest;
 import com.abm.entity.Flights;
+import com.abm.entity.SeatAvailability;
 import com.abm.exception.FlightServiceException;
 import com.abm.service.FlightsService;
 
@@ -56,7 +61,7 @@ public class FlightsController {
 			FlightAddingStatus status=new FlightAddingStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("Flight added successfully");
-			status.setFlightId(id);
+			status.setFlightId(id);			
 			
 			return status;
 		}

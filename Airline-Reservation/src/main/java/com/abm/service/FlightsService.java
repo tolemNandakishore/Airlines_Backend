@@ -1,5 +1,7 @@
 package com.abm.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,24 +45,27 @@ public class FlightsService {
 	}
 
 	public Long addFlights(Flights flights) {
-		Long count=flightsRepository.findIfFlightExists(flights.getFlightId());
-		
-		if(count==0) {
 			Flights savedFlights=flightsRepository.save(flights);
-			for(int i=1;i<=100;i++)
-			{
-				SeatAvailability seatAvailability=new SeatAvailability();
-				seatAvailability.setSeatNumber(Integer.toString(i));
-				seatAvailability.setAvailable(true);
-				seatAvailability.setFlight(savedFlights);
-				seatAvailabilityRepository.save(seatAvailability);
+			LocalDate startDate = LocalDate.now().plus(1,  ChronoUnit.DAYS);
+			LocalDate endDate = startDate.plus(30, ChronoUnit.DAYS);
+			long noOfDays = ChronoUnit.DAYS.between(startDate, endDate);
+			
+			LocalDate date = startDate;
+			for(int i=0; i<noOfDays; i++) {
+				for(int j=0; j<100; j++) {
+					SeatAvailability seatAvailability = new SeatAvailability();
+					seatAvailability.setSeatNumber(Integer.toString(j+1));
+					seatAvailability.setAvailable(true);
+					seatAvailability.setDate(endDate);
+					seatAvailability.setDate(date);
+					seatAvailability.setFlight(savedFlights);
+					seatAvailabilityRepository.save(seatAvailability);
+				}
+				date = startDate.plus(1, ChronoUnit.DAYS);
 			}
+
 			
 			return  savedFlights.getFlightId();
-		}
-		else {
-			 throw new FlightServiceException("Flight already exixts");
-		}
 				
 	}
 
