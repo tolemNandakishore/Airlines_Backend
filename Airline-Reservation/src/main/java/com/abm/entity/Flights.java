@@ -39,6 +39,14 @@ public class Flights {
 	@Column(name = "from_location")
 	private String from;
 
+	public String getFlightName() {
+		return flightName;
+	}
+
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
+	}
+
 	@Column(name = "to_location")
 	private String to;
 	
