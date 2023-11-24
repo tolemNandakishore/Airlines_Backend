@@ -25,7 +25,8 @@ public class Flights {
 	@Column(name = "Flight_Id")
 	private Long flightId;
 	private double price;  //added newly
-
+    
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)//important
 	@JoinColumn(name = "Airline_Id")
 	private Airline airline;
