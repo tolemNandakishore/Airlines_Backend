@@ -33,7 +33,7 @@ public class UsersController {
 	@PostMapping("/registration") 
 	public UserRegistrationStatus register(@RequestBody Users users) {
 		try {
-			int id=usersService.register(users);
+			Long id=usersService.register(users);
 			UserRegistrationStatus status=new UserRegistrationStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("User registered Successfully!");
@@ -55,6 +55,6 @@ public class UsersController {
 		return  usersService.findByUserNameAndPassword(userName, password);
 
 	}
-	//localhost:7777/user-controller/login/userName?=kishore&password?=passw0rd
+	//localhost:8080/user-controller/login/userName?=kishore&password?=passw0rd
 	//http://localhost:7777/user-controller/login?userName=kishore&password=passw0rd
 }

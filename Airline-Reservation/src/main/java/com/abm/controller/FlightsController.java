@@ -1,10 +1,14 @@
 package com.abm.controller;
-
-
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-//>>>>>>> branch 'master' of https://github.com/tolemNandakishore/Airlines_Backend
+
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+//github.com/tolemNandakishore/Airlines_Backend
 import java.util.List;
 
 
@@ -28,6 +32,7 @@ import com.abm.dto.FlightAddingStatus;
 import com.abm.dto.FlightUpdateRequest;
 import com.abm.dto.FlightsAddingRequest;
 import com.abm.entity.Flights;
+import com.abm.entity.SeatAvailability;
 import com.abm.exception.FlightServiceException;
 import com.abm.repository.FlightsRepository;
 import com.abm.service.FlightsService;
@@ -64,8 +69,13 @@ public class FlightsController {
 			FlightAddingStatus status=new FlightAddingStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("Flight added successfully");
+
 			status.setFlightId(id);
 
+
+			status.setFlightId(id);			
+			
+//github.com/tolemNandakishore/Airlines_Backend
 			return status;
 		}
 		catch (FlightServiceException e) {

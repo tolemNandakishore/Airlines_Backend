@@ -7,15 +7,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abm.dto.PassengerDTO;
 import com.abm.dto.ReservationDetailsDTO;
 import com.abm.dto.addPassengersStatus;
 import com.abm.entity.Passengers;
+import com.abm.entity.Reservation;
 import com.abm.exception.PassengerServiceException;
 import com.abm.service.PassengersService;
 
@@ -27,13 +30,7 @@ public class PassengersController {
 	private PassengersService passengersService;
 	private static final Logger log = LoggerFactory.getLogger(PassengersController.class);
 
-	/*@PostMapping("/add-passenger")
-	public String addPassengers(@RequestBody Passengers passengers) {
-		return passengersService.addPassengers(passengers);
-
-	}*/
-	//http://localhost/7777/passenger-controller/add-passenger
-	// @PostMapping("/add-passenger")
+	
 	public addPassengersStatus addPassengers(@RequestBody Passengers passengers) {
 
 		try {			
@@ -53,13 +50,20 @@ public class PassengersController {
 	}
 	
 	/*changes done by john*/ 
-	 @PostMapping("/add-passenger")
-	 public addPassengersStatus ProcessPassenger(@RequestBody ReservationDetailsDTO passengerDetailsDTO) {
-		 addPassengersStatus status=new addPassengersStatus();
-		 passengersService.addPassenger(passengerDetailsDTO.getPassengers());
-		 status.setStatus(true);
-			status.setMessageIfAny("Passengers added Successfully..!");	
-			return status;
-	 }
-
+//	 @PostMapping("/add-passenger")
+//	 public addPassengersStatus ProcessPassenger(@RequestBody ReservationDetailsDTO passengerDetailsDTO) {
+//		 addPassengersStatus status=new addPassengersStatus();
+//		 passengersService.addPassenger(passengerDetailsDTO.getPassengers());
+//		 status.setStatus(true);
+//			status.setMessageIfAny("Passengers added Successfully..!");	
+//			return status;
+//	 }
+	
+	@GetMapping("/passenger-controller/get-passenger")
+	public List<Passengers> findByReservationId(@RequestParam Long reservationId) {
+		return passengersService.getPassengersByReservationId(reservationId);
+       
+		
+    }
+	//http://localhost:7777/passenger-controller/passenger-controller/get-passenger?reservationId=33
 }

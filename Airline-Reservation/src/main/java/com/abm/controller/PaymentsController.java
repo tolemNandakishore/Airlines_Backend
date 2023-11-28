@@ -23,23 +23,23 @@ public class PaymentsController {
     private PaymentsService paymentsService;
 
     private static final Logger log = LoggerFactory.getLogger(PaymentsController.class);
-
-    @PostMapping("/add/payment")
-    public PaymentStatus addPayment(@RequestBody PaymentRequestDto paymentRequestDto) {
-        try {
-            Long id = paymentsService.payment(paymentRequestDto);
-            PaymentStatus status = new PaymentStatus();
-            status.setStatus(true);
-            status.setMessageIfAny("Payment successfully completed..!!");
-            status.setPaymentId(id);
-            return status;
-        } catch (PaymentServiceException e) {
-            PaymentStatus status = new PaymentStatus();
-            status.setStatus(false);
-            status.setMessageIfAny("Payment not successfully completed..!!");
-            return status;
-        }
+//
+//    @PostMapping("/add/payment")
+//    public PaymentStatus addPayment(@RequestBody PaymentRequestDto paymentRequestDto) {
+//        try {
+//            Long id = paymentsService.payment(paymentRequestDto);
+//            PaymentStatus status = new PaymentStatus();
+//            status.setStatus(true);
+//            status.setMessageIfAny("Payment successfully completed..!!");
+//            status.setPaymentId(id);
+//            return status;
+//        } catch (PaymentServiceException e) {
+//            PaymentStatus status = new PaymentStatus();
+//            status.setStatus(false);
+//            status.setMessageIfAny("Payment not successfully completed..!!");
+//            return status;
+//        }
         // http://localhost:7777/payments_controller/add/payment
-    }
+  //  }
 }
 

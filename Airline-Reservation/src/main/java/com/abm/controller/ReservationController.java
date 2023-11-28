@@ -1,9 +1,12 @@
 package com.abm.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,39 +31,19 @@ public class ReservationController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ReservationController.class);
 
-	/*@PostMapping("/reservation")
-	public ReservationStatus addReservation(@RequestBody Reservation reservation) {
-		try {
-			Long id=reservationService.addReservation(reservation);
-			ReservationStatus status=new ReservationStatus();
-			status.setStatus(true);
-			status.setMessageIfAny("reservation completed successfully..!!");
-			status.setPassengers(reservation.getPassengers());
-			status.setUserId(reservation.getUser().getUserId());
-			status.setPassengerId(id);
-			
-			return status;
-		}
-		catch (ReservationServiceException e) {
-			ReservationStatus status=new ReservationStatus();
-			status.setStatus(true);
-			status.setMessageIfAny("reservation Not completed .!!");
-			return status;
-		}
-	}
-	//http://localhost:7777/reservation_controller/reservation*/
+	
 	
 	@PostMapping("/flight/reservation")
 	public BookingStatus booking(@RequestBody ReservationDetails reservationDetails ) {
 		try {
-		Reservation id=reservationService.bookTicket(reservationDetails);
+		Reservation reservation = reservationService.bookTicket(reservationDetails);
 		BookingStatus status=new BookingStatus();
 		status.setStatus(true);
 		status.setMessageIfAny("Booking Successfully..!");
-		status.setReservationId(id);
+		status.setReservationId(reservation.getReservationId());
 		return status;
 		}
-		catch(ReservationServiceException e) {
+		catch(Exception e) {
 			BookingStatus status=new BookingStatus();
 			status.setStatus(true);
 			status.setMessageIfAny("reservation not completed.");
@@ -76,5 +59,12 @@ public class ReservationController {
 		 return result;
 	}
 	////http://localhost:7777/flight_controller/reservation/cancle?reservationId=20
+	
 
+	
+	 @GetMapping("/reservation/myreservation")
+    public List<Reservation> getReservationsByUserId(@RequestParam Long userId) {
+        return reservationService.findReservationsByUserId(userId);
+    }
+  //http://localhost:7777//reservation_controller/reservation/myreservation?userId=123
 }

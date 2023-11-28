@@ -4,15 +4,14 @@ import com.abm.entity.Reservation;
 
 public class BookingStatus extends Status {
 
-	private Reservation ReservationId;
-	
+	private long reservationId;
 
-	public Reservation getReservationId() {
-		return ReservationId;
+	public long getReservationId() {
+		return reservationId;
 	}
 
-	public void setReservationId(Reservation id) {
-		ReservationId = id;
+	public void setReservationId(long reservationId) {
+		this.reservationId = reservationId;
 	}
 	
 	

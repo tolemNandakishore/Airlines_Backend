@@ -36,7 +36,7 @@ public class UsersService {
 		return  response;
     }
 
-	public int register(Users users) {
+	public Long register(Users users) {
 		Long count=usersRepository.findIfUserExists(users.getUserName());
 		    if(count==0) {
 		    	for(Reservation reservation: users.getReservations()) {

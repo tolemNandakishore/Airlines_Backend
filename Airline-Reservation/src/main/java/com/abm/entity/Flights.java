@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_Flights")
 public class Flights {
@@ -23,8 +25,9 @@ public class Flights {
 	@Column(name = "Flight_Id")
 	private Long flightId;
 	private double price;  //added newly
-
-	@ManyToOne(cascade = CascadeType.ALL)//important
+	    
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)//important
 	@JoinColumn(name = "Airline_Id")
 	private Airline airline;
 
@@ -39,6 +42,8 @@ public class Flights {
 
 	@Column(name = "to_location")
 	private String to;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "flight")
 	private List<Reservation> reservations;
 	
@@ -47,10 +52,6 @@ public class Flights {
 	@Column(name="flight_name")
 	private String flightName;
     
-	public String getFlightName() {
-		return flightName;
-	}
-
 	public void setFlightName(String flightName) {
 		this.flightName = flightName;
 	}

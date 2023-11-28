@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_Passengers")
 public class Passengers {
@@ -35,6 +37,7 @@ public class Passengers {
 
 	// @OneToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
 	@ManyToOne // Change from @OneToMany to @ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "Reservation_Id") 
 	private Reservation reservation;
 

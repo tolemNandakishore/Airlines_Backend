@@ -30,7 +30,7 @@ public class Payments {
   
 
     @Column(name = "Amount")
-    private Long amount;
+    private Double amount;
 
     @Column(name = "Payment_Method")
     private String paymentMethod;
@@ -90,11 +90,11 @@ public class Payments {
 		this.paymentDate = paymentDate;
 	}
 
-	public Long getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 

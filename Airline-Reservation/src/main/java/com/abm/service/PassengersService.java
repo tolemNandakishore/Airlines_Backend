@@ -27,24 +27,26 @@ public class PassengersService {
 			throw new PassengerServiceException("Passenger already exists");
 		}		
 	}
-
-	/*public Long  addPassengers(Passengers passengers) {
-		passengersRepository.save(passengers);
-		return "Passenger added successfully..!!";
-
-	}*/
 	
 	/*changes by john*/
-	public void addPassenger(List<PassengerDTO> passengerDTOlist) {
-		 List<Passengers> passengersList = new ArrayList<>();
-	for( PassengerDTO passengerDTO :passengerDTOlist) {	 
-		Passengers passenger = new Passengers();
-		passenger.setFirstName(passengerDTO.getFirstName());
-		passenger.setLastName(passengerDTO.getLastName());
-		System.out.println(passengerDTO.getFirstName());
-		passengersList.add(passenger);
-	 }
-	  passengersRepository.saveAll(passengersList);
+	public List<Passengers> mapPassengerDTOListToPassengers(List<PassengerDTO> passengerDTOList, Reservation reservation) {
+        List<Passengers> passengersList = new ArrayList<>();
+        for (PassengerDTO passengerDTO : passengerDTOList) {
+            Passengers passenger = new Passengers();
+            passenger.setFirstName(passengerDTO.getFirstName());
+            passenger.setLastName(passengerDTO.getLastName());
+            passenger.setReservation(reservation); // Set the reservation for each passenger
+            passengersList.add(passenger);
+        }
+        return passengersList;
+    }
+	
+	
+	public void addPassenger(List<Passengers> passengersList) {
+		passengersRepository.saveAll(passengersList);
 	}
-
+	
+	public List<Passengers> getPassengersByReservationId(Long reservationId) {
+        return passengersRepository.findByReservationId(reservationId);
+    }
 }

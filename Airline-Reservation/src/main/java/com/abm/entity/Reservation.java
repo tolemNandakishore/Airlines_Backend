@@ -3,8 +3,10 @@ package com.abm.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +16,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.abm.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tbl_Reservations")
 public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Reservation_Id")
+	
 	private Long reservationId;
 
 	@ManyToOne//No need for reservation
@@ -37,7 +41,8 @@ public class Reservation {
 //	private String seatNumber;
 	
 	private double amount;
-
+    
+	
 	/*
 	 * @Column(name = "Status") private String status;
 	 */
@@ -47,10 +52,13 @@ public class Reservation {
 	 * 
 	 * @JoinColumn(name = "Passenger_Id")
 	 */
-	@OneToMany(mappedBy = "reservation")
+	
+	@OneToMany(mappedBy = "reservation",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Passengers> passengers;
 
-	@OneToOne(mappedBy = "reservation")
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "reservation",cascade = CascadeType.ALL)
 	private Payments payment;
 
 	@Column(name = "flight_class")

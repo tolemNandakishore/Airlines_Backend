@@ -1,5 +1,6 @@
 package com.abm.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 	String findByReservationId(Long reservationId);
 
+	@Query("select r from Reservation r where r.user.id = ?1")
+	 List<Reservation> findByUserId(Long userId);
 }

@@ -1,6 +1,9 @@
 package com.abm.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -14,6 +17,7 @@ public class Airline {
     @Column(name = "Name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "airline", fetch = FetchType.LAZY)
     private List<Flights> flights;
 
