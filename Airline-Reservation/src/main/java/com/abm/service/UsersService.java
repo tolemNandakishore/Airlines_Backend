@@ -31,17 +31,17 @@ public class UsersService {
 		    return new ResponseEntity<>(response, HttpStatus.OK);
 	}*/// implementing new method
 	
-	public Users  findByUserNameAndPassword(String userName, String password) {
-		Users response=usersRepository.findByUserNameAndPassword(userName, password);
-		return  response;
+	public String  findByUserNameAndPassword(String userName, String password) {
+	usersRepository.findByUserNameAndPassword(userName, password);
+		return  "Welcome To Airline";
     }
 
 	public Long register(Users users) {
 		Long count=usersRepository.findIfUserExists(users.getUserName());
 		    if(count==0) {
-		    	for(Reservation reservation: users.getReservations()) {
-		    	 reservation.setUser(users);
-		    	}
+//		    	for(Reservation reservation: users.getReservations()) {
+//		    	 reservation.setUser(users);
+//		    	}
 		    	Users savedUsers=usersRepository.save(users);
 		    	return  savedUsers.getUserId();
 		    }

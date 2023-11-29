@@ -51,7 +51,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/login")  //user Login method
-	public Users userLogin(@RequestParam String userName, @RequestParam String password) {
+	public String userLogin(@RequestParam String userName, @RequestParam String password) {
 		return  usersService.findByUserNameAndPassword(userName, password);
 
 	}
