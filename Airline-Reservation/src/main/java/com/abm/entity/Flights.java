@@ -47,6 +47,10 @@ public class Flights {
 	@OneToMany(mappedBy = "flight")
 	private List<Reservation> reservations;
 	
+	public String getFlightName() {
+		return flightName;
+	}
+
 	private String status;
 	
 	@Column(name="flight_name")
